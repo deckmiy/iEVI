@@ -333,4 +333,4 @@ This research was supported by [Your Institution/Funding Source].
 
 ---
 
-**Note**: This repository contains only the public layer of the algorithm. Hardware-specific implementations (serial communication, pump control, device protocols) are maintained separately.
+**Note**: This code repository only contains the core logic of the algorithm. For detailed information and control code for custom hardware components, please contact the author.
