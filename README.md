@@ -311,7 +311,7 @@ The algorithm is designed for real-time operation with the following characteris
 
 ## License
 
-This project is licensed for academic and research use. For commercial use, please contact the authors.
+GNU Affero General Public License v3.0（AGPLv3）
 
 ## Citation
 
