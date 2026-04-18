@@ -1,0 +1,37 @@
+{
+  "slope_threshold": 20.0,
+  "grace_period": 5.0,
+  "min_trigger_interval": 13.0,
+  "sliding_window_size": 5,
+  "backflush_volume_ml": 0.1,
+  "backflush_flow_ml_hr": 10.0,
+  "backflush_pressure_drop": 30.0,
+  "backflush_duration": 45,
+  "simulation_duration": 100.0,
+  "simulation_sample_rate": 1.0,
+  "simulation_baseline_pressure": 100.0,
+  "simulation_noise_std": 1.5,
+  "simulation_clog_events": [
+    [
+      25.0,
+      6.0,
+      35.0
+    ],
+    [
+      55.0,
+      7.0,
+      28.0
+    ],
+    [
+      85.0,
+      8.0,
+      32.0
+    ]
+  ],
+  "default_output_csv": "trigger_results.csv",
+  "quiet_mode": false,
+  "enable_adaptive_threshold": false,
+  "adaptive_threshold_window": 100,
+  "enable_noise_filtering": true,
+  "noise_filter_window": 3
+}

@@ -1,0 +1,17 @@
+# Adaptive Piston Algorithm - Dependencies
+# Core algorithm requires only Python standard libraries
+# Optional dependencies for extended functionality:
+
+# Visualization
+matplotlib>=3.5.0
+
+# Advanced numerical operations (optional)
+numpy>=1.21.0
+
+# Testing framework (optional)
+pytest>=7.0.0
+
+# Development tools (optional)
+black>=22.0.0
+flake8>=5.0.0
+mypy>=0.980
