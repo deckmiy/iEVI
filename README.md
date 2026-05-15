@@ -313,24 +313,6 @@ The algorithm is designed for real-time operation with the following characteris
 
 GNU Affero General Public License v3.0（AGPLv3）
 
-## Citation
-
-If you use this algorithm in your research, please cite:
-
-```
-[Citation information to be added]
-```
-
-## Contact
-
-For questions, issues, or collaborations, please contact:
-- Research Team: research@pistonalgorithm.example.com
-- Project Repository: https://github.com/yourusername/adaptive-piston-algorithm
-
-## Acknowledgements
-
-This research was supported by [Your Institution/Funding Source].
-
 ---
 
 **Note**: This code repository only contains the core logic of the algorithm. For detailed information and control code for custom hardware components, please contact the author.
