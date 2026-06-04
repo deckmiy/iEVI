@@ -4,6 +4,7 @@ Provides functions for exporting trigger results to CSV format.
 """
 
 import csv
+import os
 from typing import List, Tuple
 
 
@@ -28,6 +29,18 @@ def save_results_to_csv(
         >>> results = [(28.0, 28, 26.33, 28.0, 64.0), (58.0, 58, 21.73, 58.0, 94.0)]
         >>> save_results_to_csv(results, "results.csv")
     """
+    if os.path.isdir(output_file) or os.path.splitext(output_file)[1].lower() != ".csv":
+        os.makedirs(output_file, exist_ok=True)
+        output_file = os.path.join(output_file, "trigger_results.csv")
+    else:
+        parent = os.path.dirname(output_file)
+        if parent:
+            os.makedirs(parent, exist_ok=True)
+
+    parent = os.path.dirname(output_file)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
+
     with open(output_file, 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         
@@ -116,6 +129,10 @@ def save_analysis_summary(
         parameters: Dictionary of analysis parameters
         output_file: Path to output CSV file
     """
+    parent = os.path.dirname(output_file)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
+
     with open(output_file, 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         
