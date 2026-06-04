@@ -19,6 +19,12 @@ from ..data_processing import (
     simulate_pressure_data,
     save_results_to_csv
 )
+from ..visualization import (
+    ensure_dir,
+    plot_pressure_analysis,
+    plot_slope_analysis,
+    resolve_output_csv_path
+)
 
 
 
@@ -177,7 +183,18 @@ Examples:
         '--output',
         type=str,
         default='trigger_results.csv',
-        help='Output CSV file (default: trigger_results.csv)'
+        help='Output CSV file or output directory (default: trigger_results.csv)'
+    )
+    output_group.add_argument(
+        '--plot',
+        action='store_true',
+        help='Save pressure and slope analysis figures'
+    )
+    output_group.add_argument(
+        '--figures-dir',
+        type=str,
+        default='figures',
+        help='Directory for analysis figures when --plot is used (default: figures)'
     )
 
     output_group.add_argument(
@@ -304,16 +321,41 @@ def main():
     if not config.quiet_mode:
         print_results(results, backflush_duration)
     
-    # Save results to CSV
+    # Save results to CSV. ``--output`` may be either a file path or a directory.
     default_output = 'trigger_results.csv'
-    output_file = args.output if args.output != default_output else config.default_output_csv
+    requested_output = args.output if args.output != default_output else config.default_output_csv
+    output_file = resolve_output_csv_path(requested_output, default_filename=default_output)
     try:
         save_results_to_csv(results, output_file)
         if not config.quiet_mode:
             print(f"Results saved to: {output_file}")
     except Exception as e:
         print(f"Error saving results to CSV: {e}", file=sys.stderr)
-    
+
+    # Save process figures when requested.
+    if args.plot:
+        try:
+            figures_dir = ensure_dir(args.figures_dir)
+            pressure_plot = plot_pressure_analysis(
+                timestamps=timestamps,
+                pressures=pressures,
+                results=results,
+                output_file=os.path.join(figures_dir, "cli_pressure_triggers.png"),
+            )
+            slope_plot = plot_slope_analysis(
+                timestamps=timestamps,
+                pressures=pressures,
+                slope_threshold=config.slope_threshold,
+                trigger_times=[row[0] for row in results],
+                output_file=os.path.join(figures_dir, "cli_sliding_slope.png"),
+                grace_period=config.grace_period,
+                window_size=config.sliding_window_size,
+            )
+            if not config.quiet_mode:
+                print(f"Pressure plot saved to: {pressure_plot}")
+                print(f"Slope plot saved to: {slope_plot}")
+        except Exception as e:
+            print(f"Error saving analysis figures: {e}", file=sys.stderr)
 
     
     if not config.quiet_mode:

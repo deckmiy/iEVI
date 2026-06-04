@@ -1,6 +1,6 @@
 """
-Command-line interface for the adaptive piston algorithm.
-Provides user-friendly access to all algorithm features.
+Command-line interface package for the adaptive piston algorithm.
 """
 
-from .main import main
+# Keep this package initializer lightweight. Importing src.cli.main here causes
+# a runpy warning when executing `python -m src.cli.main`.
